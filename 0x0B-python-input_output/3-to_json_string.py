@@ -1,5 +1,13 @@
 #!/usr/bin/python3
-def write_file(filename="", text=""):
-    with open(filename, mode="w", encoding="utf-8") as fd:
-        fd.write(text)
-    return len(text)
+"""
+Returning the JSON representation of a string object.
+"""
+import json
+
+
+def to_json_string(my_obj):
+
+    """
+    json.dumps: Serialize obj to a JSON formatted str using a conversion table.
+    """
+    return (json.dumps(my_obj))
