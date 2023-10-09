@@ -1,32 +1,30 @@
-The ``Base Geometry`` module
-============================
+``7-base_geometry``module
+
+Testing 7-base_geometry module
 
 Using ``BaseGeometry``
-----------------------
+______________________
 
-This is an example text file in reStructuredText format.
-First import ``BaseGeometry`` from the ``7-base_geometry`` module:
+Importing ``BaseGeometry`` from ``7-base_geometry``
 
-    >>> BaseGeometry = __import__("7-base_geometry").BaseGeometry
+	 >>> BaseGeometry = __import('7-Base_geometry').BaseGeometry
 
-Now use it:
+Using it:
 
-    >>> bg = BaseGeometry()
-    >>> type(bg)
-    <class '7-base_geometry.BaseGeometry'>
+	>>> bg = BaseGeometry()
+	>>> type(bg)
+	<class '7-base_geometry.BaseGeometry'>
 
+Defing 2 functions
 
-This class should define 2 functions
+       >>> 'area' in dir(BaseGeometry)
+       True
 
-``area``
-    >>> 'area' in dir(BaseGeometry)
-    True
+       >>> 'integer_validator' in dir(BaseGeometry)
+       True
 
-``integer_validator``
-    >>> 'integer_validator' in dir(BaseGeometry)
-    True
-
-Should test publicity of methods ?
+       >>> 'integer_validator' in dir(BaseGeometry)
+       True
 
 And no instance attributes or methods
     >>> dir(bg) == dir(BaseGeometry)
@@ -35,34 +33,41 @@ And no instance attributes or methods
 Test ``area``
 -------------
 It is not implemented
-    >>> bg.area()
-    Traceback (most recent call last):
-    Exception: area() is not implemented
+   >>> bg.area()
+   Traceback (most recent call last):
+   Exception: area() is not implemented
+
+
 
 Test ``integer_validator``
 --------------------------
 Integer takes in 2 arguments
 
-    >>> bg.integer_validator()
-    Traceback (most recent call last):
-    TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+	>>> bg.integer_validator()
+	Traceback (most recent call last):
+	TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
 
-    >>> bg.integer_validator(1)
-    Traceback (most recent call last):
-    TypeError: integer_validator() missing 1 required positional argument: 'value'
+	>>> bg.integer_validator(1)
+	Traceback (most recent call last):
+	TypeError: integer_validator() missing 1 required positional argument: 'value'
 
-    >>> bg.integer_validator(1, 2, 3)
-    Traceback (most recent call last):
-    TypeError: integer_validator() takes 3 positional arguments but 4 were given
+	>>> bg.integer_validator(1, 2, 3)
+	Traceback (most recent call last):
+	TypeError: integer_validator() takes 3 positional arguments but 4 were given
 
+
+The first argument should be a string (no check on that yet)
+
+The second argument should be a strictly positive integer
 
 Test for type
      >>> def test_i(tests=[]):
-     ...     for test in tests:
-     ...         try:
-     ...	     bg.integer_validator("name", test)
-     ...       	 except Exception as e:
-     ...      	     print("[{}] {} for type {}".format(e.__class__.__name__, e, type(test)))
+     ... for test in tests:
+     ...       	  try:
+     ...		bg.integer_validator("name", test)
+     ...       		except Exception as e:
+     ...      		       		 print("[{}] {} for type {}".format(e.__class__.__name__, e, type(test)))
+     ...
 
      >>> tests = [True, 1.24, -76.87, set(), [1, 2], "a string", {"a":1}, ("11", 3), test_i, bg, BaseGeometry, None]
      >>> test_i(tests)
@@ -79,14 +84,17 @@ Test for type
      [TypeError] name must be an integer for type <class 'type'>
      [TypeError] name must be an integer for type <class 'NoneType'>
 
+
 Test for sign
      >>> bg.integer_validator("name", -23)
      Traceback (most recent call last):
      ValueError: name must be greater than 0
 
+
      >>> bg.integer_validator("name", 0)
      Traceback (most recent call last):
      ValueError: name must be greater than 0
+
 
 When it works it does not return anything
      >>> bg.integer_validator("name", 3)
