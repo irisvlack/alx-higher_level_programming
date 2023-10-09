@@ -1,10 +1,14 @@
-#!/usr/bin/python3
-def read_lines(filename="", nb_lines=0):
-    with open(filename, encoding="utf-8") as fd:
-        if (nb_lines == 0):
-            print(fd.read(), end="")
-        else:
-            for line in fd:
-                if (nb_lines > 0):
-                    print(line, end="")
-                    nb_lines -= 1
+n#!/usr/bin/python3
+"""
+Appending a string at the end of a text file in UTF-8 format
+and returning the number of characters added.
+"""
+
+
+def append_write(filename="", text=""):
+    """
+    Appending the text at the end of the file while returning
+    the character count of what was added.
+    """
+    with open(filename, mode="a", encoding="UTF-8") as my_file:
+        return my_file.write(text)
